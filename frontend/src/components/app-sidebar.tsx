@@ -33,6 +33,11 @@ export function AppSidebar() {
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={isActive("/analytics")} className="rounded-md px-3 py-2">
+                  <Link href="/analytics"><LayoutDashboard size={16} /> <span>Analytics</span></Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild isActive={isActive("/opportunities")} className="rounded-md px-3 py-2">
                   <Link href="/opportunities"><Briefcase size={16} /> <span>Opportunities</span></Link>
                 </SidebarMenuButton>
@@ -60,6 +65,11 @@ export function AppSidebar() {
           <SidebarGroupLabel>Mentor</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={isActive("/analytics")} className="rounded-md px-3 py-2">
+                  <Link href="/analytics"><LayoutDashboard size={16} /> <span>Analytics</span></Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild isActive={isActive("/mentor/reviews")} className="rounded-md px-3 py-2">
                   <Link href="/mentor/reviews"><FileText size={16} /> <span>Approvals</span></Link>

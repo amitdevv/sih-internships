@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { InboxDropdown } from "@/components/sections/notifications/inbox-dropdown";
 import { ProfileMenu } from "@/components/sections/profile/profile-menu";
@@ -45,7 +46,7 @@ export function Header() {
                   const href = "/" + segments.slice(0, i + 1).join("/");
                   const isLast = i === segments.length - 1;
                   return (
-                    <>
+                    <React.Fragment key={href}>
                       <BreadcrumbItem key={href + "-item"}>
                         {isLast ? (
                           <BreadcrumbPage>{label(s)}</BreadcrumbPage>
@@ -54,7 +55,7 @@ export function Header() {
                         )}
                       </BreadcrumbItem>
                       {!isLast && <BreadcrumbSeparator key={href + "-sep"} />}
-                    </>
+                    </React.Fragment>
                   );
                 })
               )}
