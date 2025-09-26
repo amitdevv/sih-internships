@@ -4,6 +4,7 @@ import React from "react";
 import { Card } from "@/components/ui/card";
 import { mockApplications } from "@/mocks/fixtures/applications";
 import { StatusChip } from "@/components/sections/applications/status-chip";
+import Link from "next/link";
 
 export default function ApplicationsPage() {
   return (
@@ -14,7 +15,9 @@ export default function ApplicationsPage() {
           <Card key={app.id} className="flex items-center justify-between p-4">
             <div>
               <div className="text-sm text-muted-foreground">{app.company}</div>
-              <div className="text-base font-medium">{app.role}</div>
+              <div className="text-base font-medium">
+                <Link href={`/applications/${app.id}`}>{app.role}</Link>
+              </div>
             </div>
             <div className="flex items-center gap-3">
               <StatusChip status={app.status} />

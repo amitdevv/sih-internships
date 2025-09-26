@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/lib/providers";
-import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/app-sidebar";
-import { Header } from "@/components/header";
+import { AppFrame } from "@/components/AppFrame";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -31,15 +30,8 @@ export default function RootLayout({
         className={`${inter.className} ${geistMono.variable} antialiased`}
       >
         <Providers>
-          <SidebarProvider>
-            <AppSidebar />
-            <SidebarInset>
-              <Header />
-              <main className="p-4">
-                <div className="mx-auto max-w-6xl space-y-4">{children}</div>
-              </main>
-            </SidebarInset>
-          </SidebarProvider>
+          <AppFrame>{children}</AppFrame>
+          <Toaster richColors position="top-right" />
         </Providers>
       </body>
     </html>

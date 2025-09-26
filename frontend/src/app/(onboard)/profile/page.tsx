@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function ProfileOnboardPage() {
   const [fullName, setFullName] = React.useState("");
@@ -13,6 +14,17 @@ export default function ProfileOnboardPage() {
   const [year, setYear] = React.useState("");
   const [cgpa, setCgpa] = React.useState("");
   const [about, setAbout] = React.useState("");
+  const isValid = React.useMemo(() => {
+    const y = Number(year);
+    const g = Number(cgpa);
+    return (
+      fullName.trim().length >= 2 &&
+      rollNo.trim().length >= 3 &&
+      department.trim().length >= 2 &&
+      Number.isFinite(y) && y >= 1 && y <= 4 &&
+      Number.isFinite(g) && g >= 0 && g <= 10
+    );
+  }, [fullName, rollNo, department, year, cgpa]);
 
   return (
     <div className="space-y-4">
@@ -47,8 +59,18 @@ export default function ProfileOnboardPage() {
           </div>
         </div>
         <div className="mt-4 flex justify-end gap-2">
-          <Link href="/" className="text-sm">Skip</Link>
-          <Link href="/onboard/skills" className="text-sm font-medium">Next</Link>
+          <Link href="/" className="text-sm">
+            <Button variant="outline" size="sm">Skip</Button>
+          </Link>
+          {isValid ? (
+            <Link href="/skills" className="text-sm font-medium">
+              <Button variant="default" size="sm">Next</Button>
+            </Link>
+          ) : (
+            <Button variant="default" size="sm" disabled aria-disabled>
+              Fill required fields
+            </Button>
+          )}
         </div>
       </Card>
     </div>

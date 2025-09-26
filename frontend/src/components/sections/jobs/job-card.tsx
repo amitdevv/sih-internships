@@ -4,16 +4,19 @@ import React from "react";
 import { Card } from "../../ui/card";
 import { Badge } from "../../ui/badge";
 import { Briefcase } from "lucide-react";
+import { Button } from "../../ui/button";
+import { StatusChip } from "../applications/status-chip";
 
 export type JobCardProps = {
-  title: string;
-  company: string;
+  title: React.ReactNode | string;
+  company: React.ReactNode | string;
   stipend?: string;
   mode?: "onsite" | "remote" | "hybrid";
   match?: number;
+  status?: string;
 };
 
-export function JobCard({ title, company, stipend, mode, match }: JobCardProps) {
+export function JobCard({ title, company, stipend, mode, match, status }: JobCardProps) {
   return (
     <Card className="rounded-lg border border-border bg-[var(--card)] p-4">
       <div className="flex items-start justify-between">
@@ -26,6 +29,7 @@ export function JobCard({ title, company, stipend, mode, match }: JobCardProps) 
           <div className="mt-2 flex flex-wrap items-center gap-2">
             {stipend && <Badge variant="secondary">Stipend: {stipend}</Badge>}
             {mode && <Badge variant="secondary">{mode}</Badge>}
+            {status && <StatusChip status={status} />}
           </div>
         </div>
         {typeof match === "number" && (
@@ -36,7 +40,7 @@ export function JobCard({ title, company, stipend, mode, match }: JobCardProps) 
         )}
       </div>
       <div className="mt-3">
-        <button className="text-sm font-medium">Apply in 1 click</button>
+        <Button variant="outline" size="sm">Apply in 1 click</Button>
       </div>
     </Card>
   );

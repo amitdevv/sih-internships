@@ -4,6 +4,7 @@ import React from "react";
 import { Card } from "@/components/ui/card";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const MOCK_MENTORS = [
   { id: "m1", name: "Dr. Sharma" },
@@ -34,10 +35,16 @@ export default function MentorOnboardPage() {
           </div>
         </div>
         <div className="mt-4 flex justify-between">
-          <Link href="/preferences" className="text-sm">Back</Link>
+          <Link href="/preferences" className="text-sm">
+            <Button variant="outline" size="sm">Back</Button>
+          </Link>
           <div className="flex gap-2">
-            <Link href="/" className="text-sm">Skip</Link>
-            <Link href="/" className="text-sm font-medium">Finish</Link>
+            <Link href="/" className="text-sm">
+              <Button variant="outline" size="sm">Skip</Button>
+            </Link>
+            <Link href="/" className="text-sm font-medium">
+              <Button variant="default" size="sm">Finish</Button>
+            </Link>
           </div>
         </div>
       </Card>

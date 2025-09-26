@@ -6,6 +6,9 @@ import { Card } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { mockOpportunities } from "@/mocks/fixtures/opportunities";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { StatusChip } from "@/components/sections/applications/status-chip";
 
 export default function OpportunityDetailPage() {
   const params = useParams<{ id: string }>();
@@ -21,13 +24,14 @@ export default function OpportunityDetailPage() {
       <Card className="p-4">
         <h1 className="text-lg font-semibold">{job.title}</h1>
         <p className="text-sm text-muted-foreground">{job.company} · {job.mode} · Stipend {job.stipend}</p>
-        <div className="mt-3 text-sm text-muted-foreground">
+        <div className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
+          <StatusChip status="Shortlisted" />
           Short description with required skills and deadline. Why you match: based on mock skills.
         </div>
         <div className="mt-4">
           <Dialog>
             <DialogTrigger asChild>
-              <button className="text-sm font-medium">Apply in 1 click</button>
+              <Button variant="outline" size="sm">Apply in 1 click</Button>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
@@ -36,8 +40,14 @@ export default function OpportunityDetailPage() {
               </DialogHeader>
               <Textarea value={cover} onChange={(e) => setCover(e.target.value)} placeholder="Write a short note (optional)" rows={5} />
               <DialogFooter>
-                <button className="text-sm">Cancel</button>
-                <button className="text-sm font-medium">Submit</button>
+                <Button variant="outline" size="sm">Cancel</Button>
+                <Button
+                  variant="default"
+                  size="sm"
+                  onClick={() => toast.success("Application submitted — waiting for mentor approval")}
+                >
+                  Submit
+                </Button>
               </DialogFooter>
             </DialogContent>
           </Dialog>

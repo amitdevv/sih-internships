@@ -4,11 +4,13 @@ import React from "react";
 import { Card } from "@/components/ui/card";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function PreferencesOnboardPage() {
   const [mode, setMode] = React.useState("remote");
   const [stipend, setStipend] = React.useState("15000");
   const [location, setLocation] = React.useState("Any");
+  const canNext = Boolean(mode && stipend && location);
 
   return (
     <div className="space-y-4">
@@ -56,10 +58,20 @@ export default function PreferencesOnboardPage() {
           </div>
         </div>
         <div className="mt-4 flex justify-between">
-          <Link href="/skills" className="text-sm">Back</Link>
+          <Link href="/skills" className="text-sm">
+            <Button variant="outline" size="sm">Back</Button>
+          </Link>
           <div className="flex gap-2">
-            <Link href="/" className="text-sm">Skip</Link>
-            <Link href="/mentor" className="text-sm font-medium">Next</Link>
+            <Link href="/" className="text-sm">
+              <Button variant="outline" size="sm">Skip</Button>
+            </Link>
+            {canNext ? (
+              <Link href="/mentor" className="text-sm font-medium">
+                <Button variant="default" size="sm">Next</Button>
+              </Link>
+            ) : (
+              <Button variant="default" size="sm" disabled>Next</Button>
+            )}
           </div>
         </div>
       </Card>

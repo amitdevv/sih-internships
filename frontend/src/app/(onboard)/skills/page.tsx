@@ -4,12 +4,14 @@ import React from "react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const MOCK_SKILLS = ["React", "Next.js", "Node.js", "PostgreSQL", "Tailwind", "Python", "Java"];
 
 export default function SkillsOnboardPage() {
   const [skills, setSkills] = React.useState<string[]>([]);
   const [query, setQuery] = React.useState("");
+  const canNext = skills.length >= 1;
 
   const filtered = MOCK_SKILLS.filter((s) => s.toLowerCase().includes(query.toLowerCase()));
 
@@ -42,10 +44,20 @@ export default function SkillsOnboardPage() {
           </div>
         </div>
         <div className="mt-4 flex justify-between">
-          <Link href="/onboard/profile" className="text-sm">Back</Link>
+          <Link href="/profile" className="text-sm">
+            <Button variant="outline" size="sm">Back</Button>
+          </Link>
           <div className="flex gap-2">
-            <Link href="/" className="text-sm">Skip</Link>
-            <Link href="/onboard/preferences" className="text-sm font-medium">Next</Link>
+            <Link href="/" className="text-sm">
+              <Button variant="outline" size="sm">Skip</Button>
+            </Link>
+            {canNext ? (
+              <Link href="/preferences" className="text-sm font-medium">
+                <Button variant="default" size="sm">Next</Button>
+              </Link>
+            ) : (
+              <Button variant="default" size="sm" disabled>Add at least 1 skill</Button>
+            )}
           </div>
         </div>
       </Card>
