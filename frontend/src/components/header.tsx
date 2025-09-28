@@ -33,7 +33,7 @@ export function Header() {
   return (
     <div className="sticky top-0 z-10 flex h-14 items-center justify-between border-b border-border bg-white px-4">
       <div className="flex items-center gap-3">
-        <SidebarTrigger className="flex-shrink-0" />
+        <SidebarTrigger className="flex-shrink-0 hidden md:flex" />
         {!showOnboarding && (
           <Breadcrumb>
             <BreadcrumbList>

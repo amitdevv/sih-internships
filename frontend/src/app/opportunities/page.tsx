@@ -1,116 +1,261 @@
 "use client";
 
 import React from "react";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import { NotionList } from "@/components/sections/dashboard/notion-list";
 import { Badge } from "@/components/ui/badge";
-import Link from "next/link";
+import { Briefcase } from "lucide-react";
 import { mockOpportunities, opportunitiesData } from "@/mocks/fixtures/opportunities";
-import { JobCard } from "@/components/sections/jobs/job-card";
 import { RecommendationEngine } from "@/components/recommendation-engine";
 
 export default function OpportunitiesPage() {
-  const [q, setQ] = React.useState("");
-  const [mode, setMode] = React.useState<string | undefined>();
   const [showRecommendations, setShowRecommendations] = React.useState(true);
-
-  const filtered = mockOpportunities.filter((o) => {
-    const matchQ = q ? (o.title + o.company).toLowerCase().includes(q.toLowerCase()) : true;
-    const matchMode = mode ? o.mode === mode : true;
-    return matchQ && matchMode;
-  });
 
   return (
     <div className="space-y-6">
+      {/* Header */}
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Job Opportunities</h1>
-        <Badge variant="outline" className="flex items-center gap-1">
-          {opportunitiesData.length} active jobs
-        </Badge>
-      </div>
-
-      {/* Search and Filters */}
-      <Card className="p-4">
-        <div className="grid gap-3 md:grid-cols-4">
-          <div className="md:col-span-2">
-            <Input 
-              value={q} 
-              onChange={(e) => setQ(e.target.value)} 
-              placeholder="Search by title, company, or skills..." 
-            />
-          </div>
-          <div>
-            <Select value={mode} onValueChange={setMode}>
-              <SelectTrigger>
-                <SelectValue placeholder="Work Mode" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="remote">Remote</SelectItem>
-                <SelectItem value="onsite">On-site</SelectItem>
-                <SelectItem value="hybrid">Hybrid</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="flex gap-2">
-            <button
-              onClick={() => setShowRecommendations(!showRecommendations)}
-              className="px-3 py-2 text-sm rounded-md"
-              style={{ 
-                backgroundColor: '#a998e7', 
-                color: '#3a2290',
-                border: 'none'
-              }}
-            >
-              {showRecommendations ? 'Hide' : 'Show'} Recommendations
-            </button>
-          </div>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setShowRecommendations(!showRecommendations)}
+            className="text-sm px-3 py-1 rounded-md border"
+            style={{ 
+              backgroundColor: showRecommendations ? '#a998e7' : 'transparent', 
+              color: showRecommendations ? '#3a2290' : '#374151',
+              borderColor: '#a998e7'
+            }}
+          >
+            {showRecommendations ? 'Hide' : 'Show'} Recommendations
+          </button>
+          <Badge variant="outline" className="flex items-center gap-1">
+            {opportunitiesData.length} active jobs
+          </Badge>
         </div>
-      </Card>
+      </div>
 
       {/* Recommendations Section */}
       {showRecommendations && (
-        <div className="space-y-4">
-          <RecommendationEngine showCount={3} />
-        </div>
+        <NotionList
+          title="Recommended for You"
+          icon={<Briefcase size={16} />}
+          items={opportunitiesData.slice(0, 3).map(opp => ({
+            id: opp.id,
+            title: opp.title,
+            company: opp.company,
+            stipend: opp.stipend,
+            mode: opp.workMode,
+            match: opp.matchScore,
+            location: opp.location,
+            duration: opp.duration,
+            skills: opp.skills,
+            type: "Internship"
+          }))}
+          searchFields={["title", "company", "skills"]}
+          filterOptions={[
+            {
+              key: "mode",
+              label: "Work Mode",
+              options: [
+                { value: "Remote", label: "Remote" },
+                { value: "On-site", label: "On-site" },
+                { value: "Hybrid", label: "Hybrid" }
+              ]
+            },
+            {
+              key: "location",
+              label: "Location",
+              options: [
+                { value: "Bangalore", label: "Bangalore" },
+                { value: "Mumbai", label: "Mumbai" },
+                { value: "Delhi", label: "Delhi" },
+                { value: "Pune", label: "Pune" }
+              ]
+            }
+          ]}
+          columns={[
+            {
+              key: "title",
+              label: "Position",
+              sortable: true,
+              render: (item) => (
+                <div>
+                  <div className="font-medium text-sm">{item.title}</div>
+                  <div className="text-xs text-muted-foreground mt-1">
+                    {item.company}
+                  </div>
+                </div>
+              )
+            },
+            {
+              key: "match",
+              label: "Match",
+              sortable: true,
+              render: (item) => (
+                <div className="text-sm">
+                  <div className="font-medium">{item.match}%</div>
+                  <div className="w-16 bg-muted rounded-full h-1.5">
+                    <div 
+                      className="bg-primary h-1.5 rounded-full" 
+                      style={{ width: `${item.match}%` }}
+                    />
+                  </div>
+                </div>
+              )
+            },
+            {
+              key: "stipend",
+              label: "Stipend",
+              sortable: true,
+              render: (item) => (
+                <div className="text-sm font-medium">
+                  {item.stipend}
+                </div>
+              )
+            },
+            {
+              key: "mode",
+              label: "Mode",
+              render: (item) => (
+                <Badge 
+                  className="text-xs px-2 py-1" 
+                  style={{ backgroundColor: '#d3e4f1', color: '#1e40af', border: 'none' }}
+                >
+                  {item.mode}
+                </Badge>
+              )
+            },
+            {
+              key: "location",
+              label: "Location",
+              render: (item) => (
+                <div className="text-sm text-muted-foreground">
+                  {item.location}
+                </div>
+              )
+            },
+            {
+              key: "duration",
+              label: "Duration",
+              render: (item) => (
+                <div className="text-sm text-muted-foreground">
+                  {item.duration || "Not specified"}
+                </div>
+              )
+            }
+          ]}
+        />
       )}
 
-      {/* All Jobs Section */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold">All Opportunities</h2>
-          <Badge variant="secondary">
-            {filtered.length} jobs found
-          </Badge>
-        </div>
-        
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((o) => (
-            <Link key={o.id} href={`/opportunities/${o.id}`}>
-              <JobCard title={o.title} company={o.company} stipend={o.stipend} mode={o.mode} match={o.match} />
-            </Link>
-          ))}
-        </div>
-
-        {filtered.length === 0 && (
-          <Card>
-            <div className="flex flex-col items-center justify-center py-8">
-              <p className="text-muted-foreground text-center">
-                No jobs found matching your criteria.
-              </p>
-              <button
-                onClick={() => {
-                  setQ("");
-                  setMode(undefined);
-                }}
-                className="mt-4 text-blue-600 hover:text-blue-700 text-sm"
+      {/* All Opportunities */}
+      <NotionList
+        title="All Opportunities"
+        icon={<Briefcase size={16} />}
+        items={opportunitiesData.map(opp => ({
+          id: opp.id,
+          title: opp.title,
+          company: opp.company,
+          stipend: opp.stipend,
+          mode: opp.workMode,
+          match: opp.matchScore,
+          location: opp.location,
+          duration: opp.duration,
+          skills: opp.skills,
+          type: "Internship" // Default type since opportunitiesData doesn't have this field
+        }))}
+        searchFields={["title", "company", "skills"]}
+        filterOptions={[
+          {
+            key: "mode",
+            label: "Work Mode",
+            options: [
+              { value: "Remote", label: "Remote" },
+              { value: "On-site", label: "On-site" },
+              { value: "Hybrid", label: "Hybrid" }
+            ]
+          },
+          {
+            key: "location",
+            label: "Location",
+            options: [
+              { value: "Bangalore", label: "Bangalore" },
+              { value: "Mumbai", label: "Mumbai" },
+              { value: "Delhi", label: "Delhi" },
+              { value: "Pune", label: "Pune" }
+            ]
+          }
+        ]}
+        columns={[
+          {
+            key: "title",
+            label: "Position",
+            sortable: true,
+            render: (item) => (
+              <div>
+                <div className="font-medium text-sm">{item.title}</div>
+                <div className="text-xs text-muted-foreground mt-1">
+                  {item.company}
+                </div>
+              </div>
+            )
+          },
+          {
+            key: "match",
+            label: "Match",
+            sortable: true,
+            render: (item) => (
+              <div className="text-sm">
+                <div className="font-medium">{item.match}%</div>
+                <div className="w-16 bg-muted rounded-full h-1.5">
+                  <div 
+                    className="bg-primary h-1.5 rounded-full" 
+                    style={{ width: `${item.match}%` }}
+                  />
+                </div>
+              </div>
+            )
+          },
+          {
+            key: "stipend",
+            label: "Stipend",
+            sortable: true,
+            render: (item) => (
+              <div className="text-sm font-medium">
+                {item.stipend}
+              </div>
+            )
+          },
+          {
+            key: "mode",
+            label: "Mode",
+            render: (item) => (
+              <Badge 
+                className="text-xs px-2 py-1" 
+                style={{ backgroundColor: '#d3e4f1', color: '#1e40af', border: 'none' }}
               >
-                Clear filters
-              </button>
-            </div>
-          </Card>
-        )}
-      </div>
+                {item.mode}
+              </Badge>
+            )
+          },
+          {
+            key: "location",
+            label: "Location",
+            render: (item) => (
+              <div className="text-sm text-muted-foreground">
+                {item.location}
+              </div>
+            )
+          },
+          {
+            key: "duration",
+            label: "Duration",
+            render: (item) => (
+              <div className="text-sm text-muted-foreground">
+                {item.duration || "Not specified"}
+              </div>
+            )
+          }
+        ]}
+      />
     </div>
   );
 }
