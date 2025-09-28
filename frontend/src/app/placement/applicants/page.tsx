@@ -139,9 +139,6 @@ export default function ApplicantsPage() {
               <TableHead className="w-10">
                 <Checkbox 
                   checked={isAllSelected}
-                  ref={(el) => {
-                    if (el) el.indeterminate = isIndeterminate;
-                  }}
                   onCheckedChange={toggleAll}
                 />
               </TableHead>

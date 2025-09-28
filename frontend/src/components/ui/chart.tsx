@@ -34,7 +34,7 @@ type ChartTooltipContentProps = TooltipProps<number, string> & {
   hideLabel?: boolean;
 };
 
-export function ChartTooltipContent({ active, payload, label, labelKey, nameKey, hideLabel }: ChartTooltipContentProps) {
+export function ChartTooltipContent({ active, payload, label, labelKey, nameKey, hideLabel }: ChartTooltipContentProps & { payload?: any[]; label?: string }) {
   if (!active || !payload?.length) return null;
   const item = payload[0];
   return (

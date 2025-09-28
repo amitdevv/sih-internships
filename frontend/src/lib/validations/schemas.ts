@@ -38,7 +38,7 @@ export const jobPostingSchema = z.object({
     .max(10, "Maximum 10 skills allowed"),
   
   jobType: z.enum(["internship", "fulltime"], {
-    required_error: "Please select a job type"
+    message: "Please select a job type"
   }),
   
   status: z.enum(["active", "paused", "closed"])

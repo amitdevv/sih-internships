@@ -157,7 +157,7 @@ export const showErrorToast = (error: AppError, retryFn?: () => void) => {
       enhancedToast.errorWithRetry(message, retryFn || (() => window.location.reload()));
       break;
     default:
-      enhancedToast.errorWithRetry(message, retryFn);
+      enhancedToast.errorWithRetry(message, retryFn || (() => window.location.reload()));
   }
 };
 
