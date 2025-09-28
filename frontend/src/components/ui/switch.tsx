@@ -12,7 +12,7 @@ const Switch = React.forwardRef<
   <SwitchPrimitives.Root
     data-slot="switch"
     className={cn(
-      "focus-visible:ring-ring bg-input data-[state=checked]:bg-primary peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border border-border p-px transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+      "focus-visible:ring-ring bg-input data-[state=checked]:bg-primary peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border border-border p-px transition-colors focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
       className
     )}
     {...props}
