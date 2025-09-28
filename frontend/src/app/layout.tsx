@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/lib/providers";
-import { AppFrame } from "@/components/AppFrame";
-import { Toaster } from "@/components/ui/sonner";
+import { ClientLayout } from "@/components/client-layout";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,8 +29,7 @@ export default function RootLayout({
         className={`${inter.className} ${geistMono.variable} antialiased`}
       >
         <Providers>
-          <AppFrame>{children}</AppFrame>
-          <Toaster richColors position="top-right" />
+          <ClientLayout>{children}</ClientLayout>
         </Providers>
       </body>
     </html>

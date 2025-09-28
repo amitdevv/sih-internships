@@ -2,77 +2,135 @@
 
 import React from "react";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { FormInput, FormTextarea } from "@/components/ui/form-field";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useFormValidation } from "@/hooks/use-form-validation";
+import { studentProfileSchema, type StudentProfileFormData } from "@/lib/validations/schemas";
 
 export default function ProfileOnboardPage() {
-  const [fullName, setFullName] = React.useState("");
-  const [rollNo, setRollNo] = React.useState("");
-  const [department, setDepartment] = React.useState("");
-  const [year, setYear] = React.useState("");
-  const [cgpa, setCgpa] = React.useState("");
-  const [about, setAbout] = React.useState("");
-  const isValid = React.useMemo(() => {
-    const y = Number(year);
-    const g = Number(cgpa);
-    return (
-      fullName.trim().length >= 2 &&
-      rollNo.trim().length >= 3 &&
-      department.trim().length >= 2 &&
-      Number.isFinite(y) && y >= 1 && y <= 4 &&
-      Number.isFinite(g) && g >= 0 && g <= 10
-    );
-  }, [fullName, rollNo, department, year, cgpa]);
+  const { form, handleSubmit, errors, isValid } = useFormValidation<StudentProfileFormData>({
+    schema: studentProfileSchema,
+    defaultValues: {
+      personalInfo: {
+        name: "",
+        email: "",
+        phone: "",
+        address: "",
+        dateOfBirth: "",
+        gender: undefined,
+        linkedin: "",
+        github: ""
+      },
+      academicInfo: {
+        university: "",
+        degree: "",
+        department: "",
+        cgpa: "",
+        graduationYear: "",
+        currentYear: "First Year"
+      },
+      skills: [],
+      preferences: {
+        jobTypes: [],
+        locations: [],
+        expectedStipend: "",
+        availableFrom: "",
+        workMode: []
+      },
+      documents: {
+        resume: "",
+        portfolio: "",
+        coverLetter: ""
+      }
+    },
+    onSuccess: async (data) => {
+      console.log("Profile data:", data);
+    }
+  });
 
   return (
     <div className="space-y-4">
       <h1 className="text-lg font-semibold">Onboarding · Profile</h1>
-      <Card className="p-4">
-        <div className="grid gap-3 md:grid-cols-2">
-          <div>
-            <label className="text-sm">Full name</label>
-            <Input value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="John Doe" />
-          </div>
-          <div>
-            <label className="text-sm">Roll no.</label>
-            <Input value={rollNo} onChange={(e) => setRollNo(e.target.value)} placeholder="20XXCS001" />
-          </div>
-          <div>
-            <label className="text-sm">Department</label>
-            <Input value={department} onChange={(e) => setDepartment(e.target.value)} placeholder="CSE" />
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="text-sm">Year</label>
-              <Input value={year} onChange={(e) => setYear(e.target.value)} placeholder="3" />
+      <form onSubmit={handleSubmit}>
+        <Card className="p-4">
+          <div className="grid gap-3 md:grid-cols-2">
+            <FormInput
+              label="Full name"
+              placeholder="John Doe"
+              error={errors.personalInfo?.name?.message}
+              required
+              {...form.register("personalInfo.name")}
+            />
+            <FormInput
+              label="Email"
+              placeholder="john@college.edu"
+              type="email"
+              error={errors.personalInfo?.email?.message}
+              required
+              {...form.register("personalInfo.email")}
+            />
+            <FormInput
+              label="Phone"
+              placeholder="+91 9876543210"
+              error={errors.personalInfo?.phone?.message}
+              {...form.register("personalInfo.phone")}
+            />
+            <FormInput
+              label="University"
+              placeholder="Your University"
+              error={errors.academicInfo?.university?.message}
+              required
+              {...form.register("academicInfo.university")}
+            />
+            <FormInput
+              label="Department"
+              placeholder="CSE"
+              error={errors.academicInfo?.department?.message}
+              required
+              {...form.register("academicInfo.department")}
+            />
+            <div className="grid grid-cols-2 gap-3">
+              <FormInput
+                label="Current Year"
+                placeholder="3"
+                error={errors.academicInfo?.currentYear?.message}
+                {...form.register("academicInfo.currentYear")}
+              />
+              <FormInput
+                label="CGPA"
+                placeholder="8.2"
+                error={errors.academicInfo?.cgpa?.message}
+                required
+                {...form.register("academicInfo.cgpa")}
+              />
             </div>
-            <div>
-              <label className="text-sm">CGPA</label>
-              <Input value={cgpa} onChange={(e) => setCgpa(e.target.value)} placeholder="8.2" />
+            <div className="md:col-span-2">
+              <FormTextarea
+                label="About"
+                placeholder="Brief summary about yourself"
+                rows={4}
+                error={errors.personalInfo?.address?.message}
+                {...form.register("personalInfo.address")}
+              />
             </div>
           </div>
-          <div className="md:col-span-2">
-            <label className="text-sm">About</label>
-            <Textarea value={about} onChange={(e) => setAbout(e.target.value)} placeholder="Brief summary" rows={4} />
-          </div>
-        </div>
-        <div className="mt-4 flex justify-end gap-2">
-          <Link href="/" className="text-sm">
-            <Button variant="outline" size="sm">Skip</Button>
-          </Link>
-          {isValid ? (
-            <Link href="/skills" className="text-sm font-medium">
-              <Button variant="default" size="sm">Next</Button>
+          <div className="mt-4 flex justify-end gap-2">
+            <Link href="/" className="text-sm">
+              <Button variant="outline" size="sm" type="button">Skip</Button>
             </Link>
-          ) : (
-            <Button variant="default" size="sm" disabled aria-disabled>
-              Fill required fields
-            </Button>
-          )}
-        </div>
-      </Card>
+            {isValid ? (
+              <Link href="/skills" className="text-sm font-medium">
+                <Button variant="default" size="sm" type="button">Next</Button>
+              </Link>
+            ) : (
+              <Button variant="default" size="sm" disabled aria-disabled>
+                Fill required fields
+              </Button>
+            )}
+          </div>
+        </Card>
+      </form>
     </div>
   );
 }

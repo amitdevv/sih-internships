@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { mockApplicants } from "@/mocks/fixtures/applicants";
 import { StatusChip } from "@/components/sections/applications/status-chip";
 import { toast } from "sonner";
@@ -38,8 +39,40 @@ export default function ApplicantsPage() {
 
   const toggle = (id: string) => setSelected((s) => ({ ...s, [id]: !s[id] }));
   const selectedIds = Object.keys(selected).filter((k) => selected[k]);
-  const bulkShortlist = () => toast.success(`Shortlisted: ${selectedIds.length} applicants`);
-  const bulkReject = () => toast.error(`Rejected: ${selectedIds.length} applicants`);
+  
+  const toggleAll = () => {
+    const allSelected = pageItems.every(item => selected[item.id]);
+    if (allSelected) {
+      // Deselect all on current page
+      const newSelected = { ...selected };
+      pageItems.forEach(item => delete newSelected[item.id]);
+      setSelected(newSelected);
+    } else {
+      // Select all on current page
+      const newSelected = { ...selected };
+      pageItems.forEach(item => newSelected[item.id] = true);
+      setSelected(newSelected);
+    }
+  };
+  
+  const isAllSelected = pageItems.length > 0 && pageItems.every(item => selected[item.id]);
+  const isIndeterminate = pageItems.some(item => selected[item.id]) && !isAllSelected;
+  
+  const bulkShortlist = () => {
+    if (selectedIds.length === 0) {
+      toast.error("Please select at least one applicant");
+      return;
+    }
+    toast.success(`Shortlisted: ${selectedIds.length} applicants`);
+  };
+  
+  const bulkReject = () => {
+    if (selectedIds.length === 0) {
+      toast.error("Please select at least one applicant");
+      return;
+    }
+    toast.error(`Rejected: ${selectedIds.length} applicants`);
+  };
 
   const exportCsv = () => {
     const rows = sorted.map((a) => [a.id, a.name, a.department, a.role, a.company, a.status, a.cgpa]);
@@ -78,8 +111,24 @@ export default function ApplicantsPage() {
           </Select>
         </div>
         <div className="mt-3 flex flex-wrap gap-2">
-          <Button variant="outline" size="sm" onClick={bulkShortlist} className="border-green-200 bg-green-50 text-green-700 hover:bg-green-100">Bulk shortlist</Button>
-          <Button variant="outline" size="sm" onClick={bulkReject} className="border-red-200 bg-red-50 text-red-700 hover:bg-red-100">Bulk reject</Button>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={bulkShortlist} 
+            disabled={selectedIds.length === 0}
+            className="border-green-200 bg-green-50 text-green-700 hover:bg-green-100 disabled:opacity-50"
+          >
+            Bulk shortlist ({selectedIds.length})
+          </Button>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={bulkReject} 
+            disabled={selectedIds.length === 0}
+            className="border-red-200 bg-red-50 text-red-700 hover:bg-red-100 disabled:opacity-50"
+          >
+            Bulk reject ({selectedIds.length})
+          </Button>
           <Button variant="outline" size="sm" onClick={exportCsv}>Export CSV</Button>
         </div>
       </Card>
@@ -87,7 +136,15 @@ export default function ApplicantsPage() {
         <Table>
           <TableHeader className="sticky top-0 z-10 bg-white">
             <TableRow>
-              <TableHead className="w-10"></TableHead>
+              <TableHead className="w-10">
+                <Checkbox 
+                  checked={isAllSelected}
+                  ref={(el) => {
+                    if (el) el.indeterminate = isIndeterminate;
+                  }}
+                  onCheckedChange={toggleAll}
+                />
+              </TableHead>
               <TableHead className="cursor-pointer" onClick={() => { setSortBy("name"); setSortDir(sortDir === "asc" ? "desc" : "asc"); }}>Name</TableHead>
               <TableHead>Department</TableHead>
               <TableHead>Role</TableHead>
@@ -98,7 +155,12 @@ export default function ApplicantsPage() {
           <TableBody>
             {pageItems.map((a) => (
               <TableRow key={a.id} className="hover:bg-white/60">
-                <TableCell><input type="checkbox" checked={!!selected[a.id]} onChange={() => toggle(a.id)} /></TableCell>
+                <TableCell>
+                  <Checkbox 
+                    checked={!!selected[a.id]} 
+                    onCheckedChange={() => toggle(a.id)}
+                  />
+                </TableCell>
                 <TableCell className="font-medium">{a.name}</TableCell>
                 <TableCell className="text-muted-foreground">{a.department}</TableCell>
                 <TableCell>{a.role} · {a.company}</TableCell>

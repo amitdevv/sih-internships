@@ -6,7 +6,7 @@ import { persist } from "zustand/middleware";
 type UIState = {
   sidebarCollapsed: boolean;
   toggleSidebar: () => void;
-  role: "student" | "mentor" | "placement" | "admin" | null;
+  role: "student" | "mentor" | "placement" | "admin" | "recruiter" | null;
   setRole: (role: UIState["role"]) => void;
 };
 

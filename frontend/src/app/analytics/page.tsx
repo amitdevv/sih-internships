@@ -1,36 +1,36 @@
 "use client";
 
 import React from "react";
-import { Card } from "@/components/ui/card";
-import { PieSkillImpact } from "@/components/sections/analytics/pie-skill-impact";
+import { useUIStore } from "@/lib/state/ui";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function AnalyticsPage() {
+  const role = useUIStore((s) => s.role);
+  const router = useRouter();
+
+  useEffect(() => {
+    // Redirect to role-specific analytics
+    if (role === "student") {
+      router.replace("/analytics/student");
+    } else if (role === "mentor") {
+      router.replace("/analytics/mentor");
+    } else if (role === "placement") {
+      router.replace("/analytics/placement");
+    } else if (role === "recruiter") {
+      router.replace("/analytics/recruiter");
+    } else {
+      // Default to student analytics if no role is set
+      router.replace("/analytics/student");
+    }
+  }, [role, router]);
+
   return (
-    <div className="space-y-4">
-      <h1 className="text-lg font-semibold">Analytics</h1>
-      <div className="grid gap-4 md:grid-cols-3">
-        <Card className="p-4">
-          <div className="text-sm text-muted-foreground">Applications submitted</div>
-          <div className="text-2xl font-semibold">12</div>
-        </Card>
-        <Card className="p-4">
-          <div className="text-sm text-muted-foreground">Shortlist rate</div>
-          <div className="text-2xl font-semibold">42%</div>
-        </Card>
-        <Card className="p-4">
-          <div className="text-sm text-muted-foreground">Interviews scheduled</div>
-          <div className="text-2xl font-semibold">5</div>
-        </Card>
+    <div className="flex items-center justify-center h-64">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
+        <p className="mt-2 text-muted-foreground">Loading analytics...</p>
       </div>
-      <PieSkillImpact />
-      <Card className="p-4">
-        <div className="text-sm text-muted-foreground">Feedback tips</div>
-        <ul className="mt-2 list-disc pl-5 text-sm">
-          <li>Complete profile to 100% for better role matches.</li>
-          <li>Target roles matching your top 3 skills for higher conversion.</li>
-          <li>Schedule interviews outside exam weeks to avoid conflicts.</li>
-        </ul>
-      </Card>
     </div>
   );
 }
