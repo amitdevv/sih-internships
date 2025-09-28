@@ -61,7 +61,7 @@ export function NotionList({
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
 
   const filteredAndSortedItems = useMemo(() => {
-    let filtered = items.filter(item => {
+    const filtered = items.filter(item => {
       // Search filter
       const matchesSearch = searchFields.some(field => 
         item[field]?.toString().toLowerCase().includes(searchTerm.toLowerCase())

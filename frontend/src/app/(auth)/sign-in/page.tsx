@@ -62,7 +62,7 @@ export default function SignInPage() {
             </div>
             <div>
               <label className="text-sm">Role</label>
-              <Select value={form.watch("role")} onValueChange={(value) => form.setValue("role", value as any)}>
+              <Select value={form.watch("role")} onValueChange={(value) => form.setValue("role", value as "student" | "mentor" | "recruiter" | "placement")}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select role" />
                 </SelectTrigger>

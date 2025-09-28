@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {}
+export type AvatarProps = React.HTMLAttributes<HTMLDivElement>
 
 export function Avatar({ className, ...props }: AvatarProps) {
   return (
@@ -17,18 +17,19 @@ export function Avatar({ className, ...props }: AvatarProps) {
   );
 }
 
-export interface AvatarImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {}
+export type AvatarImageProps = React.ImgHTMLAttributes<HTMLImageElement>
 
 export function AvatarImage({ className, ...props }: AvatarImageProps) {
   return (
     <img
       className={cn("aspect-square h-full w-full", className)}
+      alt=""
       {...props}
     />
   );
 }
 
-export interface AvatarFallbackProps extends React.HTMLAttributes<HTMLDivElement> {}
+export type AvatarFallbackProps = React.HTMLAttributes<HTMLDivElement>
 
 export function AvatarFallback({ className, ...props }: AvatarFallbackProps) {
   return (

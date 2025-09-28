@@ -178,7 +178,7 @@ export function NetworkStatus({ isOnline, className }: NetworkStatusProps) {
         <WifiOff className="h-5 w-5 text-yellow-400 mr-2" />
         <div>
           <p className="text-sm font-medium text-yellow-800">
-            You're offline
+            You&apos;re offline
           </p>
           <p className="text-sm text-yellow-700">
             Some features may not work properly. Check your internet connection.

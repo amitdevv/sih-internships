@@ -103,7 +103,7 @@ function DefaultErrorFallback({ error, resetError }: { error: Error | null; rese
           </div>
           <CardTitle className="text-xl">Oops! Something went wrong</CardTitle>
           <CardDescription>
-            We encountered an unexpected error. Don't worry, we're working on fixing it.
+            We encountered an unexpected error. Don&apos;t worry, we&apos;re working on fixing it.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
