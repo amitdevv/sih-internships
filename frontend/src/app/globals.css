@@ -150,3 +150,31 @@ html:root {
     color: #0a2642 !important;
   }
 }
+
+/* Global scrollbar styling */
+html {
+  /* Firefox */
+  scrollbar-width: thin; /* auto | thin | none */
+  scrollbar-color: oklch(0.708 0 0 / 40%) transparent; /* thumb | track */
+}
+
+/* WebKit (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 8px; /* reduce main scrollbar width */
+  height: 8px; /* reduce horizontal scrollbar height */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: oklch(0.708 0 0 / 40%);
+  border-radius: 9999px;
+  border: 2px solid transparent; /* creates inset effect */
+  background-clip: content-box;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background-color: oklch(1 0 0 / 25%);
+}

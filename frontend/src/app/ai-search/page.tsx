@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
+import { AnimatePresence, motion } from "framer-motion";
 import { MapPin, Building2, DollarSign, Clock, GraduationCap, Award, ArrowRight } from "lucide-react";
 import { useUIStore } from "@/lib/state/ui";
 
@@ -97,7 +97,7 @@ const mockStudentResults = [
     id: "2",
     name: "Arjun Singh",
     degree: "Software Engineering", 
-    university: "IIT Jaipur",
+    university: "Mnit Jaipur",
     cgpa: 8.8,
     match: 91,
     skills: ["React", "Node.js", "TypeScript", "Docker"],
@@ -125,7 +125,7 @@ const mockStudentResults = [
     id: "4",
     name: "Rahul Kumar",
     degree: "Information Technology",
-    university: "NIT Jaipur",
+    university: "NSUT Delhi",
     cgpa: 8.7,
     match: 92,
     skills: ["Python", "Django", "PostgreSQL", "Redis"],
@@ -201,35 +201,57 @@ export default function AISearchPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
-  const [searchProgress, setSearchProgress] = useState(0);
+  const [displayedResults, setDisplayedResults] = useState<SearchResult[]>([]);
   const role = useUIStore((s) => s.role);
   const isStudent = role === "student";
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const revealTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    // Focus the search input when the page mounts
+    inputRef.current?.focus();
+  }, []);
 
   const handleSearch = async () => {
     if (!searchQuery.trim()) return;
     
     setIsSearching(true);
-    setSearchProgress(0);
     setSearchResults([]);
-
-    // Simulate AI search with progress
-    const progressInterval = setInterval(() => {
-      setSearchProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(progressInterval);
-          return 100;
-        }
-        return prev + Math.random() * 15;
-      });
-    }, 200);
+    setDisplayedResults([]);
 
     // Simulate AI processing time
     setTimeout(() => {
-      clearInterval(progressInterval);
-      setSearchProgress(100);
-      setSearchResults(isStudent ? mockJobResults : mockStudentResults);
-      setIsSearching(false);
-    }, 2000);
+      const fullResults = isStudent ? mockJobResults : mockStudentResults;
+      setSearchResults(fullResults);
+
+      // Reveal results one-by-one for a streaming feel
+      let index = 0;
+      if (revealTimerRef.current) clearInterval(revealTimerRef.current);
+      revealTimerRef.current = setInterval(() => {
+        setDisplayedResults((prev) => {
+          if (index >= fullResults.length) {
+            if (revealTimerRef.current) clearInterval(revealTimerRef.current);
+            setIsSearching(false);
+            return prev;
+          }
+          const nextList = [...prev, fullResults[index]];
+          index += 1;
+          return nextList;
+        });
+      }, 220);
+    }, 900);
+  };
+
+  const handleClear = () => {
+    setSearchQuery("");
+    setSearchResults([]);
+    setDisplayedResults([]);
+    setIsSearching(false);
+    if (revealTimerRef.current) {
+      clearInterval(revealTimerRef.current);
+      revealTimerRef.current = null;
+    }
+    inputRef.current?.focus();
   };
 
   const handleSuggestedSearch = (suggestion: string) => {
@@ -244,19 +266,21 @@ export default function AISearchPage() {
           Let&apos;s find the <em className="text-[#64a6e7]">perfect</em> {isStudent ? 'job' : 'candidate'} for you
         </h1>
         <p className="text-lg text-muted-foreground">
-          with AI {isStudent ? 'job' : 'candidate'} search!
+          with AI {isStudent ? 'job' : 'candidate'} search
         </p>
       </div>
 
        {/* Search Interface */}
        <div className="max-w-3xl mx-auto">
          <div className="relative border border-[#64a6e7] rounded-xl overflow-hidden focus-within:border-[#5a9bd4] transition-colors">
-             <Input
+            <Input
+              ref={inputRef}
                placeholder={isStudent ? "Software Jobs in Bangalore" : "Computer Science students with React experience"}
                value={searchQuery}
                onChange={(e) => setSearchQuery(e.target.value)}
                onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
                className="pr-14 h-16 text-lg border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-foreground placeholder:text-muted-foreground"
+              autoFocus
              />
            <button
              onClick={handleSearch}
@@ -275,20 +299,26 @@ export default function AISearchPage() {
            </button>
          </div>
 
-         {/* Search Progress */}
-         {isSearching && (
-           <div className="mt-4 space-y-2">
-             <div className="flex items-center justify-between text-sm text-muted-foreground">
-               <span>AI is analyzing your search...</span>
-               <span>{Math.round(searchProgress)}%</span>
-             </div>
-             <Progress value={searchProgress} className="h-2" />
-           </div>
-         )}
+        {/* Loading animation */}
+        {isSearching && (
+          <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
+            <span>AI is analyzing your search</span>
+            <motion.span
+              className="flex items-center gap-1"
+              initial={{ opacity: 0.25 }}
+              animate={{ opacity: [0.25, 1, 0.25] }}
+              transition={{ duration: 1.1, repeat: Infinity }}
+            >
+              <span>•</span>
+              <span>•</span>
+              <span>•</span>
+            </motion.span>
+          </div>
+        )}
        </div>
 
       {/* Suggested Searches */}
-      {!isSearching && searchResults.length === 0 && (
+      {!isSearching && displayedResults.length === 0 && (
         <div className="text-center space-y-4">
           <p className="text-muted-foreground">Or try searching for</p>
           <div className="flex flex-wrap justify-center gap-2">
@@ -307,7 +337,7 @@ export default function AISearchPage() {
       )}
 
       {/* Search Results */}
-      {searchResults.length > 0 && (
+      {displayedResults.length > 0 && (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-semibold">
@@ -317,10 +347,23 @@ export default function AISearchPage() {
               AI Powered
             </Badge>
           </div>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="sm" onClick={handleClear} className="rounded-full">
+              Clear results
+            </Button>
+          </div>
 
           <div className="grid gap-4">
-            {searchResults.map((item) => (
-              <Card key={item.id} className="hover:shadow-md transition-shadow">
+            <AnimatePresence>
+            {displayedResults.map((item) => (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.25 }}
+              >
+              <Card className="hover:shadow-md transition-shadow">
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
@@ -388,7 +431,9 @@ export default function AISearchPage() {
                   </div>
                 </CardContent>
               </Card>
+              </motion.div>
             ))}
+            </AnimatePresence>
           </div>
         </div>
       )}
