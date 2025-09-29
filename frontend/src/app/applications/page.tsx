@@ -33,7 +33,7 @@ export default function ApplicationsPage() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">My Applications</h1>
+        <h1 className="text-2xl font-semibold">My Applications</h1>
         <Badge variant="outline" className="flex items-center gap-1">
           {mockApplications.length} applications
         </Badge>

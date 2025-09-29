@@ -1,5 +1,5 @@
 export const mockProfile = {
-  fullName: "John Doe",
+  fullName: "Sumit Kumar",
   completeness: 62,
 };
 

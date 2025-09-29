@@ -128,7 +128,7 @@ export default function StudentInterviewsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">My Interviews</h1>
+        <h1 className="text-3xl font-semibold">My Interviews</h1>
         <p className="text-muted-foreground">
           Track and manage your scheduled interviews
         </p>
@@ -142,7 +142,7 @@ export default function StudentInterviewsPage() {
             <Calendar className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{interviews.length}</div>
+            <div className="text-2xl font-semibold">{interviews.length}</div>
             <p className="text-xs text-muted-foreground">
               All time
             </p>
@@ -155,7 +155,7 @@ export default function StudentInterviewsPage() {
             <Clock className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{upcomingInterviews.length}</div>
+            <div className="text-2xl font-semibold">{upcomingInterviews.length}</div>
             <p className="text-xs text-muted-foreground">
               Scheduled interviews
             </p>
@@ -168,7 +168,7 @@ export default function StudentInterviewsPage() {
             <Video className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
+            <div className="text-2xl font-semibold">
               {interviews.filter(i => i.status === "completed").length}
             </div>
             <p className="text-xs text-muted-foreground">
@@ -183,7 +183,7 @@ export default function StudentInterviewsPage() {
             <AlertCircle className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">75%</div>
+            <div className="text-2xl font-semibold">75%</div>
             <p className="text-xs text-muted-foreground">
               Completion rate
             </p>

@@ -75,7 +75,7 @@ export default function RecruiterDashboard() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Recruiter Dashboard</h1>
+          <h1 className="text-3xl font-semibold">Recruiter Dashboard</h1>
           <p className="text-muted-foreground">
             Manage your job postings and track candidate applications
           </p>
@@ -96,7 +96,7 @@ export default function RecruiterDashboard() {
             <Briefcase className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.totalJobs}</div>
+            <div className="text-2xl font-semibold">{stats.totalJobs}</div>
             <p className="text-xs text-muted-foreground">
               {stats.activeJobs} active
             </p>
@@ -109,7 +109,7 @@ export default function RecruiterDashboard() {
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.totalApplications}</div>
+            <div className="text-2xl font-semibold">{stats.totalApplications}</div>
             <p className="text-xs text-muted-foreground">
               {stats.pendingReviews} pending review
             </p>
@@ -122,7 +122,7 @@ export default function RecruiterDashboard() {
             <Clock className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.interviewsScheduled}</div>
+            <div className="text-2xl font-semibold">{stats.interviewsScheduled}</div>
             <p className="text-xs text-muted-foreground">
               Scheduled this week
             </p>
@@ -135,7 +135,7 @@ export default function RecruiterDashboard() {
             <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.offersSent}</div>
+            <div className="text-2xl font-semibold">{stats.offersSent}</div>
             <p className="text-xs text-muted-foreground">
               This month
             </p>

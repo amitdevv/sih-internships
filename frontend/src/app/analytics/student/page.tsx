@@ -74,7 +74,7 @@ export default function StudentAnalyticsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Student Analytics</h1>
+        <h1 className="text-2xl font-semibold">Student Analytics</h1>
         <p className="text-muted-foreground">Track your job search progress and performance</p>
       </div>
 
@@ -115,7 +115,7 @@ function OverviewTab({ stats }: { stats: any }) {
           <Badge variant="secondary">{stats.applicationsSubmitted}</Badge>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats.applicationsSubmitted}</div>
+          <div className="text-2xl font-semibold">{stats.applicationsSubmitted}</div>
           <p className="text-xs text-muted-foreground">Total submitted</p>
         </CardContent>
       </Card>
@@ -126,7 +126,7 @@ function OverviewTab({ stats }: { stats: any }) {
           <Badge variant="secondary">{stats.interviewsScheduled}</Badge>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats.interviewsScheduled}</div>
+          <div className="text-2xl font-semibold">{stats.interviewsScheduled}</div>
           <p className="text-xs text-muted-foreground">Scheduled</p>
         </CardContent>
       </Card>
@@ -137,7 +137,7 @@ function OverviewTab({ stats }: { stats: any }) {
           <Badge variant="default">{stats.offersReceived}</Badge>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats.offersReceived}</div>
+          <div className="text-2xl font-semibold">{stats.offersReceived}</div>
           <p className="text-xs text-muted-foreground">Received</p>
         </CardContent>
       </Card>
@@ -148,7 +148,7 @@ function OverviewTab({ stats }: { stats: any }) {
           <Badge variant="outline">{stats.profileViews}</Badge>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats.profileViews}</div>
+          <div className="text-2xl font-semibold">{stats.profileViews}</div>
           <p className="text-xs text-muted-foreground">This month</p>
         </CardContent>
       </Card>

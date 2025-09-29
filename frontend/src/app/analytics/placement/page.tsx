@@ -79,7 +79,7 @@ export default function PlacementAnalyticsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Placement Analytics</h1>
+        <h1 className="text-2xl font-semibold">Placement Analytics</h1>
         <p className="text-muted-foreground">Track placement performance and student outcomes</p>
       </div>
 
@@ -120,7 +120,7 @@ function OverviewTab({ stats }: { stats: any }) {
           <Badge variant="secondary">{stats.totalOpportunities}</Badge>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats.totalOpportunities}</div>
+          <div className="text-2xl font-semibold">{stats.totalOpportunities}</div>
           <p className="text-xs text-muted-foreground">{stats.activeOpportunities} active</p>
         </CardContent>
       </Card>
@@ -131,7 +131,7 @@ function OverviewTab({ stats }: { stats: any }) {
           <Badge variant="secondary">{stats.totalApplications}</Badge>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats.totalApplications}</div>
+          <div className="text-2xl font-semibold">{stats.totalApplications}</div>
           <p className="text-xs text-muted-foreground">Received</p>
         </CardContent>
       </Card>
@@ -142,7 +142,7 @@ function OverviewTab({ stats }: { stats: any }) {
           <Badge variant="default">{stats.placedStudents}</Badge>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats.placedStudents}</div>
+          <div className="text-2xl font-semibold">{stats.placedStudents}</div>
           <p className="text-xs text-muted-foreground">{stats.placementRate}% rate</p>
         </CardContent>
       </Card>
@@ -153,7 +153,7 @@ function OverviewTab({ stats }: { stats: any }) {
           <Badge variant="outline">{stats.averageStipend}</Badge>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats.averageStipend}</div>
+          <div className="text-2xl font-semibold">{stats.averageStipend}</div>
           <p className="text-xs text-muted-foreground">Per month</p>
         </CardContent>
       </Card>

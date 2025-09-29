@@ -18,11 +18,11 @@ export function ProfileMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none">
         <Avatar>
-          <AvatarFallback>JD</AvatarFallback>
+          <AvatarFallback>SK</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
-        <DropdownMenuLabel>John Doe</DropdownMenuLabel>
+        <DropdownMenuLabel>Sumit Kumar</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link href="/settings" className="underline">Settings</Link>

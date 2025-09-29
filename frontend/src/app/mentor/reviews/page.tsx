@@ -35,7 +35,7 @@ export default function MentorReviewsPage() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Mentor Approvals</h1>
+        <h1 className="text-2xl font-semibold">Mentor Approvals</h1>
         <Badge variant="outline" className="flex items-center gap-1">
           {mockApprovals.length} pending reviews
         </Badge>

@@ -140,7 +140,7 @@ export default function ApplicationsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Applications Review</h1>
+        <h1 className="text-3xl font-semibold">Applications Review</h1>
         <p className="text-muted-foreground">
           Review and manage candidate applications
         </p>

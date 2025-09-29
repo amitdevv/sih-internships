@@ -57,7 +57,7 @@ export default function ProfileOnboardPage() {
           <div className="grid gap-3 md:grid-cols-2">
             <FormInput
               label="Full name"
-              placeholder="John Doe"
+              placeholder="Sumit Kumar"
               error={errors.personalInfo?.name?.message}
               required
               {...form.register("personalInfo.name")}

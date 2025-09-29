@@ -14,7 +14,7 @@ export default function OpportunitiesPage() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Job Opportunities</h1>
+        <h1 className="text-2xl font-semibold">Job Opportunities</h1>
         <div className="flex items-center gap-3">
           <button
             onClick={() => setShowRecommendations(!showRecommendations)}

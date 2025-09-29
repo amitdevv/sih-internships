@@ -136,7 +136,7 @@ export default function InterviewsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Interview Management</h1>
+          <h1 className="text-3xl font-semibold">Interview Management</h1>
           <p className="text-muted-foreground">
             Schedule and manage candidate interviews
           </p>
@@ -155,7 +155,7 @@ export default function InterviewsPage() {
             <Calendar className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{interviews.length}</div>
+            <div className="text-2xl font-semibold">{interviews.length}</div>
             <p className="text-xs text-muted-foreground">
               This month
             </p>
@@ -168,7 +168,7 @@ export default function InterviewsPage() {
             <Clock className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{upcomingInterviews.length}</div>
+            <div className="text-2xl font-semibold">{upcomingInterviews.length}</div>
             <p className="text-xs text-muted-foreground">
               Scheduled interviews
             </p>
@@ -181,7 +181,7 @@ export default function InterviewsPage() {
             <User className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
+            <div className="text-2xl font-semibold">
               {interviews.filter(i => i.status === "completed").length}
             </div>
             <p className="text-xs text-muted-foreground">
@@ -196,7 +196,7 @@ export default function InterviewsPage() {
             <Video className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
+            <div className="text-2xl font-semibold">
               {interviews.filter(i => i.type === "video").length}
             </div>
             <p className="text-xs text-muted-foreground">

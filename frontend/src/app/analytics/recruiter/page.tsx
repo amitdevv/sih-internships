@@ -80,7 +80,7 @@ export default function RecruiterAnalyticsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Recruiter Analytics</h1>
+        <h1 className="text-2xl font-semibold">Recruiter Analytics</h1>
         <p className="text-muted-foreground">Track your recruitment performance and hiring metrics</p>
       </div>
 
@@ -121,7 +121,7 @@ function OverviewTab({ stats }: { stats: any }) {
           <Badge variant="secondary">{stats.totalJobsPosted}</Badge>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats.totalJobsPosted}</div>
+          <div className="text-2xl font-semibold">{stats.totalJobsPosted}</div>
           <p className="text-xs text-muted-foreground">{stats.activeJobs} active</p>
         </CardContent>
       </Card>
@@ -132,7 +132,7 @@ function OverviewTab({ stats }: { stats: any }) {
           <Badge variant="secondary">{stats.totalApplications}</Badge>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats.totalApplications}</div>
+          <div className="text-2xl font-semibold">{stats.totalApplications}</div>
           <p className="text-xs text-muted-foreground">Received</p>
         </CardContent>
       </Card>
@@ -143,7 +143,7 @@ function OverviewTab({ stats }: { stats: any }) {
           <Badge variant="default">{stats.interviewsConducted}</Badge>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats.interviewsConducted}</div>
+          <div className="text-2xl font-semibold">{stats.interviewsConducted}</div>
           <p className="text-xs text-muted-foreground">Conducted</p>
         </CardContent>
       </Card>
@@ -154,7 +154,7 @@ function OverviewTab({ stats }: { stats: any }) {
           <Badge variant="outline">{stats.offersExtended}</Badge>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats.offersExtended}</div>
+          <div className="text-2xl font-semibold">{stats.offersExtended}</div>
           <p className="text-xs text-muted-foreground">Success rate</p>
         </CardContent>
       </Card>

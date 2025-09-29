@@ -72,7 +72,7 @@ export default function MentorAnalyticsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Mentor Analytics</h1>
+        <h1 className="text-2xl font-semibold">Mentor Analytics</h1>
         <p className="text-muted-foreground">Track your review performance and student guidance</p>
       </div>
 
@@ -113,7 +113,7 @@ function OverviewTab({ stats }: { stats: any }) {
           <Badge variant="secondary">{stats.totalReviews}</Badge>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats.totalReviews}</div>
+          <div className="text-2xl font-semibold">{stats.totalReviews}</div>
           <p className="text-xs text-muted-foreground">Completed</p>
         </CardContent>
       </Card>
@@ -124,7 +124,7 @@ function OverviewTab({ stats }: { stats: any }) {
           <Badge variant="destructive">{stats.pendingReviews}</Badge>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats.pendingReviews}</div>
+          <div className="text-2xl font-semibold">{stats.pendingReviews}</div>
           <p className="text-xs text-muted-foreground">Awaiting review</p>
         </CardContent>
       </Card>
@@ -135,7 +135,7 @@ function OverviewTab({ stats }: { stats: any }) {
           <Badge variant="default">{Math.round((stats.approvedApplications / (stats.approvedApplications + stats.rejectedApplications)) * 100)}%</Badge>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{Math.round((stats.approvedApplications / (stats.approvedApplications + stats.rejectedApplications)) * 100)}%</div>
+          <div className="text-2xl font-semibold">{Math.round((stats.approvedApplications / (stats.approvedApplications + stats.rejectedApplications)) * 100)}%</div>
           <p className="text-xs text-muted-foreground">Success rate</p>
         </CardContent>
       </Card>
@@ -146,7 +146,7 @@ function OverviewTab({ stats }: { stats: any }) {
           <Badge variant="outline">{stats.averageReviewTime}</Badge>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats.averageReviewTime}</div>
+          <div className="text-2xl font-semibold">{stats.averageReviewTime}</div>
           <p className="text-xs text-muted-foreground">Per application</p>
         </CardContent>
       </Card>
@@ -317,11 +317,11 @@ function StudentsTab() {
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="text-center">
-                    <div className="text-lg font-bold">{student.applications}</div>
+                    <div className="text-lg font-semibold">{student.applications}</div>
                     <div className="text-xs text-muted-foreground">Applications</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-lg font-bold text-green-600">{student.approved}</div>
+                    <div className="text-lg font-semibold text-green-600">{student.approved}</div>
                     <div className="text-xs text-muted-foreground">Approved</div>
                   </div>
                   <Badge variant={student.status === "Active" ? "default" : "secondary"}>
