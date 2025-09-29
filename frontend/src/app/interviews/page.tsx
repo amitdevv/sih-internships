@@ -226,7 +226,7 @@ export default function StudentInterviewsPage() {
                           Join Now
                         </Button>
                       )}
-                      <Button variant="outline" size="sm" className="bg-transparent border hover:bg-gray-50" style={{ borderColor: '#a998e7', color: '#3a2290' }}>
+                      <Button variant="outline" size="sm" className="bg-transparent border hover:bg-gray-50 cursor-pointer" style={{ borderColor: '#11406f', color: '#11406f' }}>
                         View Details
                       </Button>
                     </div>
@@ -340,7 +340,7 @@ export default function StudentInterviewsPage() {
                             variant="outline"
                             onClick={() => handleReschedule(interview.id)}
                             className="bg-transparent border hover:bg-gray-50"
-                            style={{ borderColor: '#a998e7', color: '#3a2290' }}
+                            style={{ borderColor: '#11406f', color: '#11406f' }}
                           >
                             Reschedule
                           </Button>
@@ -349,7 +349,7 @@ export default function StudentInterviewsPage() {
                             variant="outline"
                             onClick={() => handleCancel(interview.id)}
                             className="bg-transparent border hover:bg-gray-50"
-                            style={{ borderColor: '#a998e7', color: '#3a2290' }}
+                            style={{ borderColor: '#11406f', color: '#11406f' }}
                           >
                             Cancel
                           </Button>

@@ -117,4 +117,36 @@ html:root {
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* Custom text selection color */
+  ::selection {
+    background-color: #90c0ee;
+    color: #0a2642;
+  }
+  
+  ::-moz-selection {
+    background-color: #90c0ee;
+    color: #0a2642;
+  }
+  
+  /* Input text selection color */
+  input::selection {
+    background-color: #90c0ee !important;
+    color: #0a2642 !important;
+  }
+  
+  input::-moz-selection {
+    background-color: #90c0ee !important;
+    color: #0a2642 !important;
+  }
+  
+  textarea::selection {
+    background-color: #90c0ee !important;
+    color: #0a2642 !important;
+  }
+  
+  textarea::-moz-selection {
+    background-color: #90c0ee !important;
+    color: #0a2642 !important;
+  }
 }

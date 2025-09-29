@@ -12,7 +12,7 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
-import { LayoutDashboard, Briefcase, FileText, Award, Settings, Calendar } from "lucide-react";
+import { LayoutDashboard, Briefcase, FileText, Award, Settings, Calendar, Search, Code } from "lucide-react";
 import { useUIStore } from "@/lib/state/ui";
 
 export function AppSidebar() {
@@ -39,6 +39,11 @@ export function AppSidebar() {
               <SidebarMenuItem>
                 <SidebarMenuButton asChild isActive={isActive("/opportunities")} className="rounded-md px-3 py-2" tooltip="Opportunities">
                   <Link href="/opportunities"><Briefcase size={16} /> <span>Opportunities</span></Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={isActive("/ai-search")} className="rounded-md px-3 py-2" tooltip="AI Job Search">
+                  <Link href="/ai-search"><Code size={16} /> <span>AI Job Search</span></Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
@@ -130,6 +135,11 @@ export function AppSidebar() {
               <SidebarMenuItem>
                 <SidebarMenuButton asChild isActive={isActive("/recruiter/jobs")} className="rounded-md px-3 py-2" tooltip="Jobs">
                   <Link href="/recruiter/jobs"><Briefcase size={16} /> <span>Jobs</span></Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={isActive("/ai-search")} className="rounded-md px-3 py-2" tooltip="AI Student Search">
+                  <Link href="/ai-search"><Search size={16} /> <span>AI Student Search</span></Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>

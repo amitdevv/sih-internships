@@ -14,7 +14,9 @@ import {
   Settings,
   Users,
   CheckSquare,
-  Plus
+  Plus,
+  Code,
+  Search
 } from "lucide-react";
 
 export function MobileNav() {
@@ -31,8 +33,8 @@ export function MobileNav() {
     { href: "/", label: "Dashboard", icon: LayoutDashboard },
     { href: "/analytics/student", label: "Analytics", icon: BarChart3 },
     { href: "/opportunities", label: "Jobs", icon: Briefcase },
+    { href: "/ai-search", label: "AI Job Search", icon: Code },
     { href: "/applications", label: "Applications", icon: FileText },
-    { href: "/certificates", label: "Certificates", icon: Award },
   ];
 
   // Mentor navigation items
@@ -55,6 +57,7 @@ export function MobileNav() {
     { href: "/recruiter", label: "Dashboard", icon: LayoutDashboard },
     { href: "/analytics/recruiter", label: "Analytics", icon: BarChart3 },
     { href: "/recruiter/jobs", label: "Jobs", icon: Briefcase },
+    { href: "/ai-search", label: "AI Student Search", icon: Search },
     { href: "/recruiter/applications", label: "Applications", icon: FileText },
     { href: "/recruiter/interviews", label: "Interviews", icon: Calendar },
   ];

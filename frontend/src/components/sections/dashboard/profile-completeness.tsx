@@ -24,7 +24,7 @@ export function ProfileCompleteness({ name, percent }: { name: string; percent: 
       </div>
       <div className="mt-3 flex gap-2">
         <Link href="/profile" className="text-sm font-medium">
-          <Button variant="default" size="sm">Complete profile</Button>
+          <Button variant="default" className="bg-[#90c0ee] hover:bg-[#bdd9f5] cursor-pointer text-[#0a2642]" size="sm">Complete profile</Button>
         </Link>
         <Link href="/opportunities" className="text-sm">
           <Button variant="outline" size="sm">Browse roles</Button>

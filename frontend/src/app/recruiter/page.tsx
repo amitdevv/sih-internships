@@ -174,7 +174,7 @@ export default function RecruiterDashboard() {
                 </div>
               ))}
             </div>
-            <Button variant="outline" className="w-full mt-4" asChild>
+            <Button className="w-full mt-4 cursor-pointer bg-[#e9f2fc] hover:bg-[#e9f2fc]/90 text-[#185a9b] " asChild>
               <Link href="/recruiter/jobs">View All Jobs</Link>
             </Button>
           </CardContent>
@@ -221,7 +221,7 @@ export default function RecruiterDashboard() {
                 </div>
               ))}
             </div>
-            <Button variant="outline" className="w-full mt-4" asChild>
+            <Button className="w-full mt-4 cursor-pointer bg-[#e9f2fc] hover:bg-[#e9f2fc]/90 text-[#185a9b] " asChild>
               <Link href="/recruiter/applications">View All Applications</Link>
             </Button>
           </CardContent>

@@ -18,11 +18,10 @@ export default function OpportunitiesPage() {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setShowRecommendations(!showRecommendations)}
-            className="text-sm px-3 py-1 rounded-md border"
+            className="text-sm px-3 py-1 rounded-md border cursor-pointer"
             style={{ 
-              backgroundColor: showRecommendations ? '#a998e7' : 'transparent', 
-              color: showRecommendations ? '#3a2290' : '#374151',
-              borderColor: '#a998e7'
+              backgroundColor: showRecommendations ? '#90c0ee' : 'transparent', 
+              color: showRecommendations ? '#0a2642' : '#374151',
             }}
           >
             {showRecommendations ? 'Hide' : 'Show'} Recommendations
@@ -95,7 +94,7 @@ export default function OpportunitiesPage() {
                   <div className="font-medium">{item.match}%</div>
                   <div className="w-16 bg-muted rounded-full h-1.5">
                     <div 
-                      className="bg-primary h-1.5 rounded-full" 
+                      className="bg-[#64a6e7] h-1.5 rounded-full" 
                       style={{ width: `${item.match}%` }}
                     />
                   </div>
@@ -207,7 +206,7 @@ export default function OpportunitiesPage() {
                 <div className="font-medium">{item.match}%</div>
                 <div className="w-16 bg-muted rounded-full h-1.5">
                   <div 
-                    className="bg-primary h-1.5 rounded-full" 
+                    className="bg-[#64a6e7] h-1.5 rounded-full" 
                     style={{ width: `${item.match}%` }}
                   />
                 </div>

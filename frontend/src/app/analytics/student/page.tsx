@@ -232,12 +232,12 @@ function SkillsTab({ skillDemand }: { skillDemand: any }) {
                   <span>Market Demand</span>
                   <span>{item.demand}%</span>
                 </div>
-                <Progress value={item.demand} className="h-2" />
+                <Progress value={item.demand} className="h-1" />
                 <div className="flex justify-between text-xs text-muted-foreground">
                   <span>Your Match</span>
                   <span>{item.match}%</span>
                 </div>
-                <Progress value={item.match} className="h-2" />
+                <Progress value={item.match} className="h-1" />
               </div>
             </div>
           ))}
@@ -324,7 +324,7 @@ function PerformanceTab() {
                 </div>
                 <Progress 
                   value={(item.value / item.target) * 100} 
-                  className="h-2"
+                  className="h-1"
                 />
                 <div className="text-xs text-muted-foreground">
                   {item.value >= item.target ? '✓ Target achieved' : `${item.target - item.value}${item.unit || '%'} to reach target`}

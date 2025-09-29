@@ -230,7 +230,7 @@ function PerformanceTab({ departmentBreakdown }: { departmentBreakdown: any }) {
                   <span>Approval Rate</span>
                   <span>{dept.rate}%</span>
                 </div>
-                <Progress value={dept.rate} className="h-2" />
+                <Progress value={dept.rate} className="h-1" />
               </div>
             </div>
           ))}

@@ -367,7 +367,7 @@ function ApplicationsTab({ formatDate, getStatusColor }: any) {
                 <div className="font-medium">{item.match}%</div>
                 <div className="w-16 bg-muted rounded-full h-1.5">
                   <div 
-                    className="bg-primary h-1.5 rounded-full" 
+                    className="bg-[#64a6e7] h-1.5 rounded-full" 
                     style={{ width: `${item.match}%` }}
                   />
                 </div>
@@ -450,7 +450,7 @@ function OpportunitiesTab() {
                 <div className="font-medium">{item.match}%</div>
                 <div className="w-16 bg-muted rounded-full h-1.5">
                   <div 
-                    className="bg-primary h-1.5 rounded-full" 
+                    className="bg-[#90c0ee] h-1.5 rounded-full" 
                     style={{ width: `${item.match}%` }}
                   />
                 </div>
