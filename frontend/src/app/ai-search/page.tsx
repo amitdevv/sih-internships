@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import React, { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Bot, Search, MapPin, Building2, DollarSign, Clock, Star, Users, GraduationCap, Award, ArrowRight } from "lucide-react";
+import { MapPin, Building2, DollarSign, Clock, GraduationCap, Award, ArrowRight } from "lucide-react";
 import { useUIStore } from "@/lib/state/ui";
 
 // Mock data for AI search results
@@ -165,10 +165,42 @@ const suggestedStudentSearches = [
   "Recent graduates available for internships"
 ];
 
+// Types for search results
+type JobResult = {
+  id: string;
+  title: string;
+  company: string;
+  location: string;
+  salary: string;
+  type: string;
+  match: number;
+  skills: string[];
+  description: string;
+  posted: string;
+  remote: boolean;
+};
+
+type StudentResult = {
+  id: string;
+  name: string;
+  degree: string;
+  university: string;
+  cgpa: number;
+  match: number;
+  skills: string[];
+  experience: string;
+  location: string;
+  availability: string;
+  projects: number;
+  internships: number;
+};
+
+type SearchResult = JobResult | StudentResult;
+
 export default function AISearchPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
-  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [searchProgress, setSearchProgress] = useState(0);
   const role = useUIStore((s) => s.role);
   const isStudent = role === "student";
@@ -209,7 +241,7 @@ export default function AISearchPage() {
       {/* Header */}
       <div className="text-center space-y-2">
         <h1 className="text-3xl font-medium">
-          Let's find the <em className="text-[#64a6e7]">perfect</em> {isStudent ? 'job' : 'candidate'} for you
+          Let&apos;s find the <em className="text-[#64a6e7]">perfect</em> {isStudent ? 'job' : 'candidate'} for you
         </h1>
         <p className="text-lg text-muted-foreground">
           with AI {isStudent ? 'job' : 'candidate'} search!
@@ -293,7 +325,7 @@ export default function AISearchPage() {
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-lg font-semibold">{item.title || item.name}</h3>
+                        <h3 className="text-lg font-semibold">{isStudent ? (item as JobResult).title : (item as StudentResult).name}</h3>
                         <Badge className="bg-[#64a6e7] text-white">
                           {item.match}% match
                         </Badge>
@@ -302,7 +334,7 @@ export default function AISearchPage() {
                       <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
                         <div className="flex items-center gap-1">
                           <Building2 size={16} />
-                          <span>{item.company || item.university}</span>
+                          <span>{isStudent ? (item as JobResult).company : (item as StudentResult).university}</span>
                         </div>
                         <div className="flex items-center gap-1">
                           <MapPin size={16} />
@@ -312,29 +344,31 @@ export default function AISearchPage() {
                           <>
                             <div className="flex items-center gap-1">
                               <DollarSign size={16} />
-                              <span>{item.salary}</span>
+                              <span>{(item as JobResult).salary}</span>
                             </div>
                             <div className="flex items-center gap-1">
                               <Clock size={16} />
-                              <span>{item.posted}</span>
+                              <span>{(item as JobResult).posted}</span>
                             </div>
                           </>
                         ) : (
                           <>
                             <div className="flex items-center gap-1">
                               <GraduationCap size={16} />
-                              <span>{item.degree}</span>
+                              <span>{(item as StudentResult).degree}</span>
                             </div>
                             <div className="flex items-center gap-1">
                               <Award size={16} />
-                              <span>CGPA: {item.cgpa}</span>
+                              <span>CGPA: {(item as StudentResult).cgpa}</span>
                             </div>
                           </>
                         )}
                       </div>
 
                       <p className="text-sm text-muted-foreground mb-4">
-                        {item.description || `${item.experience} of experience. ${item.projects} projects completed.`}
+                        {isStudent
+                          ? (item as JobResult).description
+                          : `${(item as StudentResult).experience} of experience. ${(item as StudentResult).projects} projects completed.`}
                       </p>
 
                       <div className="flex flex-wrap gap-2">
