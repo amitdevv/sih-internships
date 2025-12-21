@@ -6,8 +6,13 @@ export const getPageTitle = (pathname: string, role?: string | null): string => 
   // Remove leading slash and split path
   const path = pathname.replace(/^\//, '').split('/');
   
-  // Handle root path
+  // Handle root path (landing page)
   if (pathname === '/' || pathname === '') {
+    return baseTitle;
+  }
+  
+  // Handle dashboard
+  if (pathname === '/dashboard') {
     return role ? `${role.charAt(0).toUpperCase() + role.slice(1)} Dashboard - ${baseTitle}` : `Dashboard - ${baseTitle}`;
   }
   

@@ -38,7 +38,7 @@ export default function SignInPage() {
       setGlobalRole(data.role);
       const redirect = data.role === "mentor" ? "/mentor/reviews" : 
                       data.role === "placement" ? "/placement/applicants" : 
-                      data.role === "recruiter" ? "/recruiter" : "/";
+                      data.role === "recruiter" ? "/recruiter" : "/dashboard";
       router.push(redirect);
     }
   });

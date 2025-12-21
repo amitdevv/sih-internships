@@ -27,8 +27,8 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/")} className="rounded-md px-3 py-2" tooltip="Dashboard">
-                  <Link href="/"><LayoutDashboard size={16} /> <span>Dashboard</span></Link>
+                <SidebarMenuButton asChild isActive={isActive("/dashboard")} className="rounded-md px-3 py-2" tooltip="Dashboard">
+                  <Link href="/dashboard"><LayoutDashboard size={16} /> <span>Dashboard</span></Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>

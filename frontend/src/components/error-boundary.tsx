@@ -87,7 +87,7 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
 
 function DefaultErrorFallback({ error, resetError }: { error: Error | null; resetError: () => void }) {
   const handleGoHome = () => {
-    window.location.href = "/";
+    window.location.href = "/dashboard";
   };
 
   const handleRefresh = () => {

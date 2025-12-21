@@ -24,13 +24,13 @@ export function MobileNav() {
   const role = useUIStore((s) => s.role);
 
   const isActive = (href: string) => {
-    if (href === "/") return pathname === "/";
+    if (href === "/dashboard") return pathname === "/dashboard";
     return pathname.startsWith(href);
   };
 
   // Student navigation items
   const studentNavItems = [
-    { href: "/", label: "Dashboard", icon: LayoutDashboard },
+    { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
     { href: "/analytics/student", label: "Analytics", icon: BarChart3 },
     { href: "/opportunities", label: "Jobs", icon: Briefcase },
     { href: "/ai-search", label: "AI Job Search", icon: Code },

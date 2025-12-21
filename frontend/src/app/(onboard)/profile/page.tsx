@@ -116,7 +116,7 @@ export default function ProfileOnboardPage() {
             </div>
           </div>
           <div className="mt-4 flex justify-end gap-2">
-            <Link href="/" className="text-sm">
+            <Link href="/dashboard" className="text-sm">
               <Button variant="outline" size="sm" type="button">Skip</Button>
             </Link>
             {isValid ? (

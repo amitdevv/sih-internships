@@ -14,11 +14,12 @@ export function AppFrame({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const role = useUIStore((s) => s.role);
   const isAuth = pathname?.startsWith("/sign-in") || pathname?.startsWith("/sign-up");
+  const isLanding = pathname === "/";
   // Always run hooks in the same order; handle redirects inside the effect
   React.useEffect(() => {
-    if (!isAuth && !role) router.replace("/sign-in");
-  }, [isAuth, role, router]);
-  if (isAuth) return <>{children}</>;
+    if (!isAuth && !isLanding && !role) router.replace("/sign-in");
+  }, [isAuth, isLanding, role, router]);
+  if (isAuth || isLanding) return <>{children}</>;
   if (!role) return null;
   return (
     <SidebarProvider>

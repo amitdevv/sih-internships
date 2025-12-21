@@ -87,7 +87,7 @@ export default function PreferencesOnboardPage() {
               <Button variant="outline" size="sm" type="button">Back</Button>
             </Link>
             <div className="flex gap-2">
-              <Link href="/" className="text-sm">
+              <Link href="/dashboard" className="text-sm">
                 <Button variant="outline" size="sm" type="button">Skip</Button>
               </Link>
               {isValid ? (

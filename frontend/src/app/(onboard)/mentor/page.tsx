@@ -39,10 +39,10 @@ export default function MentorOnboardPage() {
             <Button variant="outline" size="sm">Back</Button>
           </Link>
           <div className="flex gap-2">
-            <Link href="/" className="text-sm">
+            <Link href="/dashboard" className="text-sm">
               <Button variant="outline" size="sm">Skip</Button>
             </Link>
-            <Link href="/" className="text-sm font-medium">
+            <Link href="/dashboard" className="text-sm font-medium">
               <Button variant="default" size="sm">Finish</Button>
             </Link>
           </div>
